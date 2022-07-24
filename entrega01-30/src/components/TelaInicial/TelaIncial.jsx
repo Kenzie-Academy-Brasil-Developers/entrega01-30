@@ -17,7 +17,7 @@ function TelaIncial({ setIsLogged }) {
         </h2>
         <p>de forma rápida e segura</p>
         <button onClick={login}>Iniciar</button>
-      </div>
+      </div> 
       <div>
         <img src={card} alt="card" />
       </div>

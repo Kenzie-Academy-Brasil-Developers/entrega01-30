@@ -9,7 +9,7 @@ import {
 } from "./styled";
 import TotalMoney from "../TotalMoney/TotalMoney";
 
-function Form({ setIsTransaction, isTransaction, sucess, error }) {
+function Form({ setIsTransaction, isTransaction, sucess, error, setDespesas, setEntradas, setTodos}) {
   const [isDescription, setIsDescription] = useState("");
   const [isValue, setIsValue] = useState("");
   const [isType, setIsType] = useState("");
@@ -20,8 +20,18 @@ function Form({ setIsTransaction, isTransaction, sucess, error }) {
       isType.trim() !== "" &&
       isValue.trim() !== ""
     ) {
-      sucess();
+
+      if(isType === 'Entrada') {
+        const Transaction = { isDescription, isValue: parseInt(isValue), isType };
+        setEntradas(old => [...old, Transaction])
+      }else{
+        const Transaction = { isDescription, isValue: parseInt(isValue), isType };
+        setDespesas(old => [...old, Transaction])
+      }
+
       const Transaction = { isDescription, isValue: parseInt(isValue), isType };
+      setTodos(old => [...old, Transaction])
+      sucess();
       setIsTransaction([...isTransaction, Transaction]);
     } else {
       error();

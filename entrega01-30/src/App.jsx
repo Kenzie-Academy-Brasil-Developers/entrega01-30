@@ -13,12 +13,17 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [isTransaction, setIsTransaction] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
+  const [entradas, setEntradas] = useState([])
+  const [despesas, setDespesas] = useState([])
+  const [todos, setTodos] = useState([])
 
   function filter(description) {
     const filtered = isTransaction.filter(
       (trasaction) => trasaction.isDescription !== description
     );
     setIsTransaction(filtered);
+    
+    
   }
 
   function sucess() {
@@ -53,11 +58,17 @@ function App() {
           isTransaction={isTransaction}
           sucess={sucess}
           error={error}
+          setDespesas={setDespesas}
+          setEntradas={setEntradas}
+          setTodos={setTodos}
         />
         <Lista
           isTransaction={isTransaction}
           setIsTransaction={setIsTransaction}
           filter={filter}
+          entradas={entradas}
+          despesas={despesas}
+          todos={todos}
         />
       </Div>
       <ToastContainer />

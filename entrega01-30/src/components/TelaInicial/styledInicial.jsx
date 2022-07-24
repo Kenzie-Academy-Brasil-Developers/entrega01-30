@@ -9,9 +9,24 @@ export const Section = styled.section`
   justify-content: center;
   gap: 5rem;
   font-weight: bolder;
+  flex-direction: column;
   color: white;
+  @media screen and (min-width: 1000px){
+        flex-direction: row;
+      }
 
   div {
+    img{
+      display: none;
+
+
+      @media screen and (min-width: 1000px){
+        display: flex;
+      }
+
+    }
+
+
     opacity: 0;
     animation: opacity 2s forwards;
 
