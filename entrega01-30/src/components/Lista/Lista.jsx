@@ -2,14 +2,7 @@ import { Section, Ul } from "./styledLista";
 import { BsFillTrashFill } from "react-icons/bs";
 import { toast } from "react-toastify";
 
-function Lista({
-  isTransaction,
-  setIsTransaction,
-  filter,
-  entradas,
-  despesas,
-  todos,
-}) {
+function Lista({ isTransaction, filter, filtrar }) {
   function remove(description) {
     filter(description);
     toast.success("Removido!", {
@@ -21,19 +14,6 @@ function Lista({
       draggable: true,
       progress: undefined,
     });
-  }
-
-  function filtrar(event) {
-    const buttonText = event.target.textContent;
-    if (buttonText === "Entradas") {
-      setIsTransaction(entradas);
-    }
-    if (buttonText === "Despesas") {
-      setIsTransaction(despesas);
-    }
-    if (buttonText === "Todos") {
-      setIsTransaction(todos);
-    }
   }
 
   return (

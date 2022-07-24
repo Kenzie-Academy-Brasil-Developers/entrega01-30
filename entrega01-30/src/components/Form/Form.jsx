@@ -9,31 +9,43 @@ import {
 } from "./styled";
 import TotalMoney from "../TotalMoney/TotalMoney";
 
-function Form({ setIsTransaction, isTransaction, sucess, error, setDespesas, setEntradas, setTodos}) {
+function Form({ setIsTransaction, isTransaction, sucess, error, alerta }) {
   const [isDescription, setIsDescription] = useState("");
   const [isValue, setIsValue] = useState("");
   const [isType, setIsType] = useState("");
 
   function addTransaction() {
+
     if (
       isDescription.trim() !== "" &&
       isType.trim() !== "" &&
       isValue.trim() !== ""
     ) {
-
-      if(isType === 'Entrada') {
-        const Transaction = { isDescription, isValue: parseInt(isValue), isType };
-        setEntradas(old => [...old, Transaction])
-      }else{
-        const Transaction = { isDescription, isValue: parseInt(isValue), isType };
-        setDespesas(old => [...old, Transaction])
+      if (isTransaction.length <= 0) {
+        const Transaction = {
+          isDescription,
+          isValue: parseInt(isValue),
+          isType,
+        };
+        sucess();
+        setIsTransaction([...isTransaction, Transaction]);
+      } else if (isTransaction.length > 0) {
+       const text = isTransaction.find((transaction) => transaction.isDescription === isDescription)
+          if (text === undefined) {
+            const Transaction = {
+              isDescription,
+              isValue: parseInt(isValue),
+              isType,
+            };
+            sucess();
+            setIsTransaction([...isTransaction, Transaction]);
+          }
+          else{
+            alerta();
+          }
       }
-
-      const Transaction = { isDescription, isValue: parseInt(isValue), isType };
-      setTodos(old => [...old, Transaction])
-      sucess();
-      setIsTransaction([...isTransaction, Transaction]);
-    } else {
+    } 
+    else {
       error();
     }
   }

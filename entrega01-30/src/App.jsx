@@ -13,20 +13,15 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [isTransaction, setIsTransaction] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
-  const [entradas, setEntradas] = useState([])
-  const [despesas, setDespesas] = useState([])
-  const [todos, setTodos] = useState([])
 
-  function filter(description) {
+  const filter = (description) => {
     const filtered = isTransaction.filter(
       (trasaction) => trasaction.isDescription !== description
     );
     setIsTransaction(filtered);
-    
-    
-  }
+  };
 
-  function sucess() {
+  const sucess = () => {
     toast.success("Adicionado!", {
       position: "top-center",
       autoClose: 1000,
@@ -36,8 +31,8 @@ function App() {
       draggable: true,
       progress: undefined,
     });
-  }
-  function error() {
+  };
+  const error = () => {
     toast.error("Inserir em todos os campos!", {
       position: "top-center",
       autoClose: 1000,
@@ -47,7 +42,19 @@ function App() {
       draggable: true,
       progress: undefined,
     });
-  }
+  };
+
+  const alerta = () => {
+    toast.info("AVISO: Já foi inserido !!", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   return isLogged ? (
     <Section>
@@ -58,17 +65,12 @@ function App() {
           isTransaction={isTransaction}
           sucess={sucess}
           error={error}
-          setDespesas={setDespesas}
-          setEntradas={setEntradas}
-          setTodos={setTodos}
+          alerta={alerta}
         />
         <Lista
           isTransaction={isTransaction}
           setIsTransaction={setIsTransaction}
           filter={filter}
-          entradas={entradas}
-          despesas={despesas}
-          todos={todos}
         />
       </Div>
       <ToastContainer />
